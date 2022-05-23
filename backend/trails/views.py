@@ -21,11 +21,11 @@ def user_trails(request):
     if request.method == 'POST':
         serializer = TrailSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(user=request.user)
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'GET':
-        trails = Trail.objects.filter(trail_id=request.user.id)
+        trails = Trail.objects.filter(trail_id=request.trail.id)
         serializer = TrailSerializer(trails, many=True)
         return Response(serializer.data)
 

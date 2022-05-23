@@ -8,3 +8,6 @@ class TrailSerializer(serializers.ModelSerializer):
         fields = ['id', 'trail_name', 'difficulty',
                   'trail_start_id', 'trail_end_id', 'user_id']
         depth = 1
+    user_id = serializers.IntegerField(write_only=True)
+    trail_start_id = serializers.IntegerField(write_only=True)
+    trail_end_id = serializers.IntegerField(write_only=True)
