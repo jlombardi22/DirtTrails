@@ -20,4 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/auth/', include('authentication.urls')),
     path('api/cars/', include('cars.urls')),
+    path('api/start_trails/', include('start_trails.urls')),
+    path('api/end_trails/', include('end_trails.urls')),
+    path('api/trails/', include('trails.urls')),
 ]
