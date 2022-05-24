@@ -4,6 +4,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
 from .serializers import StartTrailSerializer
 from .models import StartTrail
+from django.shortcuts import get_object_or_404
 # Create your views here.
 
 
@@ -30,3 +31,20 @@ def start_point(request):
         start_trails = StartTrail.objects.filter(trail_id=request.trail.id)
         serializer = StartTrailSerializer(start_trails, many=True)
         return Response(serializer.data)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def start_point_detail(request, pk):
+    start_trail = get_object_or_404(StartTrail, pk=pk)
+    if request.method == 'GET':
+        serializer = StartTrailSerializer(start_trail)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = StartTrailSerializer(start_trail, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        start_trail.delete()
+        return Response(status=status.HTTP_202_ACCEPTED)
