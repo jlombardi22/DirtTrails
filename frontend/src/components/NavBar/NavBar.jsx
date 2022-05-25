@@ -10,9 +10,14 @@ const Navbar = () => {
   return (
     <div className="navBar">
       <ul>
-        <li className="brand">
+        <li className="home">
           <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-            <b>React/Django JWT</b>
+            Home
+          </Link>
+        </li>
+        <li className="map">
+          <Link to="map" style={{ textDecoration: "none", color: "white" }}>
+            Map
           </Link>
         </li>
         <li>

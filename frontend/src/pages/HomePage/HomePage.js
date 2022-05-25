@@ -30,7 +30,7 @@ const HomePage = () => {
     <div className="container">
       <h1>Home Page for {user.username}!</h1>
       {cars &&
-        cars.map((car) => (
+        cars.map(car => (
           <p key={car.id}>
             {car.year} {car.model} {car.make}
           </p>
