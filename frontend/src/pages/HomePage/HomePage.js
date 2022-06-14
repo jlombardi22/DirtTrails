@@ -1,7 +1,8 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
-
+import { Card, CardBody, CardTitle } from "reactstrap";
+import "./HomePage.css";
 import axios from "axios";
 
 const HomePage = () => {
@@ -9,34 +10,69 @@ const HomePage = () => {
   // The "token" value is the JWT token that you will send in the header of any request requiring authentication
   //TODO: Add an AddCars Page to add a car for a logged in user's garage
   const [user, token] = useAuth();
-  const [cars, setCars] = useState([]);
+  const [trails, setTrails] = useState([]);
+  // const [cars, setCars] = useState([]);
 
   useEffect(() => {
-    const fetchCars = async () => {
+    const fetchTrails = async () => {
       try {
-        let response = await axios.get("http://127.0.0.1:8000/api/cars/", {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
-        setCars(response.data);
+        let response = await axios.get(
+          "http://127.0.0.1:8000/api/trails/all/",
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
+        setTrails(response.data);
       } catch (error) {
         console.log(error.response.data);
       }
     };
-    fetchCars();
+    fetchTrails();
   }, [token]);
   return (
-    <div className="container">
+    <Card key={trails.id}>
       <h1>Home Page for {user.username}!</h1>
-      {cars &&
-        cars.map(car => (
-          <p key={car.id}>
-            {car.year} {car.model} {car.make}
-          </p>
-        ))}
-    </div>
+      <CardTitle>{trails.trail_name}</CardTitle>
+      {trails.map(trails => (
+        <CardBody>
+          <img
+            alt="Card image cap"
+            src="https://picsum.photos/318/180"
+            width="100%"
+          />
+        </CardBody>
+      ))}
+    </Card>
   );
 };
 
 export default HomePage;
+
+// useEffect(() => {
+//   const fetchCars = async () => {
+//     try {
+//       let response = await axios.get("http://127.0.0.1:8000/api/cars/", {
+//         headers: {
+//           Authorization: "Bearer " + token,
+//         },
+//       });
+//       setCars(response.data);
+//     } catch (error) {
+//       console.log(error.response.data);
+//     }
+//   };
+//   fetchCars();
+// }, [token]);
+// return (
+//   <div className="container">
+//     <h1>Home Page for {user.username}!</h1>
+//     {cars &&
+//       cars.map(car => (
+//         <p key={car.id}>
+//           {car.year} {car.model} {car.make}
+//         </p>
+//       ))}
+//   </div>
+// );

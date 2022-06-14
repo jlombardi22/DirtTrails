@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'end_trails',
     'start_trails',
     'trails',
+    'campsites',
 ]
 
 MIDDLEWARE = [

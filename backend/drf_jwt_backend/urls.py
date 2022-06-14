@@ -23,4 +23,5 @@ urlpatterns = [
     path('api/start_trails/', include('start_trails.urls')),
     path('api/end_trails/', include('end_trails.urls')),
     path('api/trails/', include('trails.urls')),
+    path('api/campsites/', include('campsites.urls')),
 ]
