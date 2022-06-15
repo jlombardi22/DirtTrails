@@ -3,12 +3,12 @@
     width: 10rem;
     
 }
-.trails-kept{
+.camps-kept{
 display: grid;
 grid-template-columns: repeat(3, 1fr);
 grid-auto-rows: auto;
 grid-gap: 1rem;
 }
-.trail-header{
+.camp-header{
 text-align: center;
 }

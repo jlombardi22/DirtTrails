@@ -32,19 +32,25 @@ const HomePage = () => {
     fetchTrails();
   }, [token]);
   return (
-    <Card key={trails.id}>
-      <h1>Home Page for {user.username}!</h1>
-      <CardTitle>{trails.trail_name}</CardTitle>
-      {trails.map(trails => (
-        <CardBody>
-          <img
-            alt="Card image cap"
-            src="https://picsum.photos/318/180"
-            width="100%"
-          />
-        </CardBody>
-      ))}
-    </Card>
+    <div className="trail-container">
+      <div>
+        <h1 className="trail-header">{user.username}'s saved trails</h1>
+      </div>
+      <div className="trails-kept">
+        {trails.map(trails => (
+          <Card key={trails.id}>
+            <CardTitle>{trails.trail_name}</CardTitle>
+            <CardBody>
+              <img
+                alt="trail"
+                src="https://picsum.photos/318/180"
+                width="100%"
+              />
+            </CardBody>
+          </Card>
+        ))}
+      </div>
+    </div>
   );
 };
 
